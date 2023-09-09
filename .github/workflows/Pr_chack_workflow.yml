@@ -34,6 +34,11 @@ jobs:
           key-prefix: gradle-lint
 
       # run unit tests
+      - name: change wrapper permission
+        id: change_wrapper_permission
+        run: chmod +x ./gradlew
+
+      # run unit tests
       - name: Run unit tests
         id: run_unit_tests
         run: ./gradlew testDebugUnitTest
