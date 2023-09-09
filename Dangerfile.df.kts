@@ -6,7 +6,7 @@ danger(args) {
     val modifiedFiled = git.modifiedFiles
     val allSourceFiles = modifiedFiled + createdFiles
     val bigPRThreshold = 1200
-    val prTitleRegex = Regex("^(([A-Z]+-[0-9]+)+(,(\\s)+)*)+:(\\s)+.*$")
+    val prTitleRegex = Regex("#\\d")
 
     onGitHub {
         val prAdditionCount = pullRequest.additions ?: 0
@@ -19,7 +19,7 @@ danger(args) {
 
         //check jiraId in PR title
         if (!prTitleRegex.matches(pullRequest.title)) {
-            fail("No Jira Id found in PR Title. Please ensure that the PR title conforms to the format: `<JIRA_ID>: <Title>`.")
+            fail("No Github issue Id found in PR Title. Please ensure that the PR title conforms to the format: `<Github_issue_Id>: <Title>`.")
         }
 
         //check changes should be less than the threshold
